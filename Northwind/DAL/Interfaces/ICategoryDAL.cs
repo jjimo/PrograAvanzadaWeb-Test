@@ -1,7 +1,9 @@
 ﻿using System;
+using Entities.Entities;
+
 namespace DAL.Interfaces
 {
-	public interface ICategoryDAL
+	public interface ICategoryDAL: IDALGenerico<Category>
 	{
 	}
 }
