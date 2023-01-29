@@ -13,9 +13,17 @@ namespace DAL.Implementations
     {
         NORTHWINDContext context;
 
+
         public CategoryDALImpl()
         {
             context = new NORTHWINDContext();
+
+        }
+
+        public CategoryDALImpl(NORTHWINDContext _Context)
+        {
+            context = _Context;
+
         }
 
         public bool Add(Category entity)
@@ -28,10 +36,12 @@ namespace DAL.Implementations
                     unidad.Complete();
                 }
 
+
                 return true;
             }
             catch (Exception)
             {
+
                 return false;
             }
         }
@@ -51,10 +61,11 @@ namespace DAL.Implementations
             Category category;
             using (UnidadDeTrabajo<Category> unidad = new UnidadDeTrabajo<Category>(context))
             {
+
                 category = unidad.genericDAL.Get(id);
             }
-
             return category;
+
         }
 
         public IEnumerable<Category> GetAll()
@@ -70,6 +81,7 @@ namespace DAL.Implementations
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
@@ -84,9 +96,11 @@ namespace DAL.Implementations
                     unidad.genericDAL.Remove(entity);
                     result = unidad.Complete();
                 }
+
             }
             catch (Exception)
             {
+
                 result = false;
             }
 
@@ -105,8 +119,24 @@ namespace DAL.Implementations
 
         public bool Update(Category entity)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            try
+            {
+                using (UnidadDeTrabajo<Category> unidad = new UnidadDeTrabajo<Category>(context))
+                {
+                    unidad.genericDAL.Update(entity);
+                    result = unidad.Complete();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+            return result;
         }
     }
 }
-
