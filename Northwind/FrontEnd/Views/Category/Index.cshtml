@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FrontEnd.Models.CategoryModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+<p>
+    <a asp-action="Create">Crear</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { id = item.CategoryId }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.CategoryId }) |
+                    @Html.ActionLink("Eliminar", "Eliminar", new { id = item.CategoryId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
