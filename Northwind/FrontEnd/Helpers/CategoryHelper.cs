@@ -34,6 +34,36 @@ namespace FrontEnd.Helpers
 
 			return category;
 		}
-	}
+
+		public CategoryModel Create(CategoryModel category)
+		{
+			CategoryModel Category;
+			HttpResponseMessage responseMessage = serviceRepository.PostResponse("api/Category/", category);
+			var content = responseMessage.Content.ReadAsStringAsync().Result;
+			Category = JsonConvert.DeserializeObject<CategoryModel>(content);
+
+			return Category;
+		}
+
+        public CategoryModel Edit(CategoryModel category)
+        {
+            CategoryModel Category;
+            HttpResponseMessage responseMessage = serviceRepository.PutResponse("api/Category/", category);
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            Category = JsonConvert.DeserializeObject<CategoryModel>(content);
+
+            return Category;
+        }
+
+        public CategoryModel Delete(int id)
+        {
+            CategoryModel Category;
+            HttpResponseMessage responseMessage = serviceRepository.DeleteResponse("api/Category/" + id.ToString());
+            var content = responseMessage.Content.ReadAsStringAsync().Result;
+            Category = JsonConvert.DeserializeObject<CategoryModel>(content);
+
+            return Category;
+        }
+    }
 }
 
